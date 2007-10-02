@@ -1,0 +1,74 @@
+ command line:
+   ./conditional_sum_test_vhd_isim_beh.exe
+     -intstyle  ise
+     -ipchost  localhost
+     -ipcport  1472
+
+Tue Oct 02 22:44:40 2007
+
+Total Line Count = 1052
+
+ Elaboration time 0 sec.
+
+ Estimate current memory usage 44.7652 Meg. 
+
+ Total signals 59
+ Total nets 169
+ Total signal drivers 145
+ Total blocks 13
+ Total primitive blocks 5
+ Total processes 144
+ntrace select -o on -n /conditional_sum_test_vhd/ci 
+ntrace select -o on -n /conditional_sum_test_vhd/sub 
+ntrace select -o on -n /conditional_sum_test_vhd/a 
+ntrace select -o on -n /conditional_sum_test_vhd/b 
+ntrace select -o on -n /conditional_sum_test_vhd/s 
+ntrace select -o on -n /conditional_sum_test_vhd/s 
+ntrace select -o on -n /conditional_sum_test_vhd/s 
+ntrace select -o on -n /conditional_sum_test_vhd/s 
+ntrace select -o on -n /conditional_sum_test_vhd/s 
+ntrace select -o on -n /conditional_sum_test_vhd/s 
+ntrace select -o on -n /conditional_sum_test_vhd/s 
+ntrace select -o on -n /conditional_sum_test_vhd/s 
+ntrace select -o on -n /conditional_sum_test_vhd/s 
+ntrace select -o on -n /conditional_sum_test_vhd/n 
+ntrace select -o on -n /conditional_sum_test_vhd/z 
+ntrace select -o on -n /conditional_sum_test_vhd/v 
+ntrace select -o on -n /conditional_sum_test_vhd/lt 
+ntrace select -o on -n /conditional_sum_test_vhd/co 
+ntrace start 
+run 1000 ns 
+Simulator is doing circuit initialization process.
+Finished circuit initialization process.
+put a 00000001 
+run all 
+put b 00000011 
+run all 
+run all 
+put b 00000011 
+put b(1:2) 11 
+put b(1:0) 11 
+step 
+run all 
+run all 
+restart
+put a(0) 1 
+put b(1:0) 11 
+run 
+Simulator is doing circuit initialization process.
+Finished circuit initialization process.
+put a 01001101 
+put b 01101011 
+run 
+restart
+put a 01001101 
+put b 01101011 
+run 
+Simulator is doing circuit initialization process.
+Finished circuit initialization process.
+restart
+put a 11001101 
+put b 01101011 
+run 
+Simulator is doing circuit initialization process.
+Finished circuit initialization process.
