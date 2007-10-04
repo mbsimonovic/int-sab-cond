@@ -38,18 +38,11 @@ ARCHITECTURE behavior OF conditional_sum_test_vhd IS
 
 	-- Component Declaration for the Unit Under Test (UUT)
 	COMPONENT conditional_sum_adder
-	PORT(
-		A : IN std_logic_vector(7 downto 0);
-		B : IN std_logic_vector(7 downto 0);
-		CI : IN std_logic;
-		SUB : IN std_logic;          
-		S : OUT std_logic_vector(7 downto 0);
-		N : OUT std_logic;
-		Z : OUT std_logic;
-		V : OUT std_logic;
-		LT : OUT std_logic;
-		CO : OUT std_logic
-		);
+	port(A,B : in Std_Logic_Vector(7 downto 0); 
+	CI : in Std_Logic; 
+	SUB : in Std_Logic; 
+	S : out Std_Logic_Vector(7 downto 0); 
+	CO : out Std_Logic);
 	END COMPONENT;
 
 	--Inputs
@@ -60,10 +53,6 @@ ARCHITECTURE behavior OF conditional_sum_test_vhd IS
 
 	--Outputs
 	SIGNAL S :  std_logic_vector(7 downto 0);
-	SIGNAL N :  std_logic;
-	SIGNAL Z :  std_logic;
-	SIGNAL V :  std_logic;
-	SIGNAL LT :  std_logic;
 	SIGNAL CO :  std_logic;
 
 BEGIN
@@ -75,10 +64,6 @@ BEGIN
 		CI => CI,
 		SUB => SUB,
 		S => S,
-		N => N,
-		Z => Z,
-		V => V,
-		LT => LT,
 		CO => CO
 	);
 
@@ -86,13 +71,18 @@ BEGIN
 	BEGIN
 
 		-- Wait 100 ns for global reset to finish
-		wait for 100 ns;
+		--wait for 100 ns;
 		-- Place stimulus here
-			A<= "00000000" after 100ns;
-			B<= "00000000" after 100ns;
-			A<= "00000001" after 120ns;
-			A<= "00000011" after 140ns;
-			B<= "00000001" after 160ns;
+			A<= "00000000" ;
+			B<= "00000000" ;
+			A<= "00000001" after 10ns;
+			A<= "00000011" after 20ns;
+			B<= "00000001" after 30ns;
+			B<= "00000010" after 40ns;
+			B<= "00000001" after 50ns;
+			B<= "00001011" after 60ns;
+			--A<= "00000000" after 90ns;
+			--B<= "00000000" after 90ns;
 		wait; -- will wait forever
 	END PROCESS;
 
