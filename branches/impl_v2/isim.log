@@ -1,7 +1,28 @@
  command line:
-   ./main_isim_beh.exe
+   ./main_test_vhd_isim_beh.exe
      -intstyle  ise
      -ipchost  localhost
-     -ipcport  2755
-ERROR:Simulator:29 - at 0 ns : Index -2 out of bound 7 downto 0.
+     -ipcport  3427
 
+Sun Oct 07 00:36:02 2007
+
+Total Line Count = 1226
+
+ Elaboration time 0.03125 sec.
+
+ Estimate current memory usage 44.7119 Meg. 
+
+ Total signals 118
+ Total nets 170
+ Total signal drivers 36
+ Total blocks 35
+ Total primitive blocks 29
+ Total processes 35
+ntrace select -o on -n /main_test_vhd/ci 
+ntrace select -o on -n /main_test_vhd/a 
+ntrace select -o on -n /main_test_vhd/b 
+ntrace select -o on -n /main_test_vhd/s 
+ntrace start 
+run 1000 ns 
+Simulator is doing circuit initialization process.
+Finished circuit initialization process.
