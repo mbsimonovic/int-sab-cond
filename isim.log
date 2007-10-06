@@ -1,34 +1,7 @@
  command line:
-   ./conditional_sum_test_vhd_isim_beh.exe
+   ./main_isim_beh.exe
      -intstyle  ise
      -ipchost  localhost
-     -ipcport  2654
+     -ipcport  2755
+ERROR:Simulator:29 - at 0 ns : Index -2 out of bound 7 downto 0.
 
-Thu Oct 04 14:01:40 2007
-
-Total Line Count = 964
-
- Elaboration time 0 sec.
-
- Estimate current memory usage 44.7365 Meg. 
-
- Total signals 29
- Total nets 139
- Total signal drivers 123
- Total blocks 9
- Total primitive blocks 1
- Total processes 122
-ntrace select -o on -n /conditional_sum_test_vhd/ci 
-ntrace select -o on -n /conditional_sum_test_vhd/sub 
-ntrace select -o on -n /conditional_sum_test_vhd/a 
-ntrace select -o on -n /conditional_sum_test_vhd/b 
-ntrace select -o on -n /conditional_sum_test_vhd/s 
-ntrace select -o on -n /conditional_sum_test_vhd/co 
-ntrace start 
-run 1000 ns 
-Simulator is doing circuit initialization process.
-Finished circuit initialization process.
-restart
-run 200 ns 
-Simulator is doing circuit initialization process.
-Finished circuit initialization process.
