@@ -1,0 +1,7 @@
+ command line:
+   ./main_isim_beh.exe
+     -intstyle  ise
+     -ipchost  localhost
+     -ipcport  2755
+ERROR:Simulator:29 - at 0 ns : Index -2 out of bound 7 downto 0.
+
