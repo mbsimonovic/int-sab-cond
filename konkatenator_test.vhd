@@ -3,15 +3,15 @@
 -- Company: 
 -- Engineer:
 --
--- Create Date:   23:37:46 10/04/2007
--- Design Name:   main
--- Module Name:   D:/fax/03_algarh/04_projekat-conditional-sum_adder/impl_v2/main_test.vhd
+-- Create Date:   11:53:18 10/06/2007
+-- Design Name:   konkatenator
+-- Module Name:   D:/fax/03_algarh/04_projekat-conditional-sum_adder/google_int_sab_v2/konkatenator_test.vhd
 -- Project Name:  cond_sum_adder_v2
 -- Target Device:  
 -- Tool versions:  
 -- Description:   
 -- 
--- VHDL Test Bench Created by ISE for module: main
+-- VHDL Test Bench Created by ISE for module: konkatenator
 --
 -- Dependencies:
 -- 
@@ -31,37 +31,35 @@ USE ieee.std_logic_1164.ALL;
 USE ieee.std_logic_unsigned.all;
 USE ieee.numeric_std.ALL;
 
-ENTITY main_test_vhd IS
-END main_test_vhd;
+ENTITY konkatenator_test_vhd IS
+END konkatenator_test_vhd;
 
-ARCHITECTURE behavior OF main_test_vhd IS 
+ARCHITECTURE behavior OF konkatenator_test_vhd IS 
 
 	-- Component Declaration for the Unit Under Test (UUT)
-	COMPONENT main
-	port(A,B : in Std_Logic_Vector(7 downto 0); 
-		CI : in Std_Logic; 
-		S : out Std_Logic_Vector(7 downto 0); 
-		COUT : out Std_Logic); 
+	COMPONENT konkatenator
+	PORT(
+		A : IN std_logic_vector;
+		B : IN std_logic_vector;       
+		c : INOUT std_logic_vector
+		);
 	END COMPONENT;
 
 	--Inputs
-	SIGNAL CI :  std_logic := '0';
 	SIGNAL A :  std_logic_vector(7 downto 0) := (others=>'0');
 	SIGNAL B :  std_logic_vector(7 downto 0) := (others=>'0');
 
-	--Outputs
-	SIGNAL S :  std_logic_vector(7 downto 0);
-	SIGNAL COUT :  std_logic;
+	--BiDirs
+	SIGNAL A :  std_logic_vector(7 downto 0);
+	SIGNAL B :  std_logic_vector(7 downto 0);
 
 BEGIN
 
 	-- Instantiate the Unit Under Test (UUT)
-	uut: main PORT MAP(
+	uut: konkatenator PORT MAP(
 		A => A,
 		B => B,
-		CI => CI,
-		S => S,
-		COUT => COUT
+		c => c
 	);
 
 	tb : PROCESS
@@ -71,11 +69,11 @@ BEGIN
 		wait for 100 ns;
 
 		-- Place stimulus here
-		A<="11101110" after 10ns;
-		B<="01101101" after 10ns;
---	   A<="00000011" after 20ns;
---		B<="00000010" after 30ns;
---		B<="00000101" after 40ns;
+		A<="00000001" after 10ns;
+	   A<="00000011" after 20ns;
+		B<="00000010" after 30ns;
+		B<="00000101" after 40ns;
+
 		wait; -- will wait forever
 	END PROCESS;
 

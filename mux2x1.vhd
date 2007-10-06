@@ -14,7 +14,7 @@ architecture Behavioral of mux2x1 is
 begin
 process (a,b,ctrl)
 begin
-	if (CTRL = '0') then
+	if (CTRL = '1') then
 		OUTPUT <= A;
 	else 
 		OUTPUT <= B;
