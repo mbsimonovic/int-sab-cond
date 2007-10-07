@@ -2,41 +2,31 @@
    ./main_test_vhd_isim_beh.exe
      -intstyle  ise
      -ipchost  localhost
-     -ipcport  4750
+     -ipcport  3979
 
-Sun Oct 07 23:28:17 2007
+Mon Oct 08 00:10:06 2007
 
-Total Line Count = 1386
+Total Line Count = 1247
 
- Elaboration time 0.03125 sec.
+ Elaboration time 0.015625 sec.
 
- Estimate current memory usage 44.7242 Meg. 
+ Estimate current memory usage 44.7283 Meg. 
 
- Total signals 170
- Total nets 218
+ Total signals 126
+ Total nets 154
  Total signal drivers 64
- Total blocks 48
- Total primitive blocks 42
+ Total blocks 34
+ Total primitive blocks 28
  Total processes 63
 ntrace select -o on -n /main_test_vhd/ci 
 ntrace select -o on -n /main_test_vhd/a 
 ntrace select -o on -n /main_test_vhd/b 
-ntrace select -o on -n /main_test_vhd/s 
-ntrace select -o on -n /main_test_vhd/s 
-ntrace select -o on -n /main_test_vhd/s 
-ntrace select -o on -n /main_test_vhd/s 
-ntrace select -o on -n /main_test_vhd/s 
-ntrace select -o on -n /main_test_vhd/s 
-ntrace select -o on -n /main_test_vhd/s 
-ntrace select -o on -n /main_test_vhd/s 
 ntrace select -o on -n /main_test_vhd/s 
 ntrace start 
 run 1000 ns 
 Simulator is doing circuit initialization process.
 Finished circuit initialization process.
 restart
-put a 00001011 
-put b 00001101 
-run 100 
+run 200 ns 
 Simulator is doing circuit initialization process.
 Finished circuit initialization process.
