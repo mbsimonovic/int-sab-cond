@@ -25,7 +25,7 @@ component konkatenator is
 end component;
 
 TYPE matrica IS ARRAY (0 TO 3) OF STD_LOGIC_VECTOR(8-1 DOWNTO 0);
-SIGNAL  S0, S1, BAFER1, BAFER2, C0,C1: matrica;
+SIGNAL  S0, S1, C0,C1: matrica;
 
 begin
 
@@ -39,14 +39,6 @@ obrada:
 	for k in 0 to 3-1 generate
 	po_vrsti: for j in 1 to 2**(3-1-k) generate
 	
-	zero_select: 
-	mux2x1  port map(
-					S1(k)(2**(k+1)*j-1 downto 2**(k+1)*j-1-((2**(k)-1))),
-					S0(k)(2**(k+1)*j-1 downto 2**(k+1)*j-1-(2**(k)-1) ),
-					C0(k)(2**(k+1)*j-1-(2**(k)-1) -1), --?
-					BAFER1 (k)(2**(k+1)*j-1 downto 2**(k+1)*j-1-((2**(k)-1))));
-					
-					
 	zero_carry_select: mux2x1  port map(
 					C1(k)(2**(k+1)*j-1 downto 2**(k+1)*j-1-(2**(k)-1)),
 					C0(k)(2**(k+1)*j-1 downto 2**(k+1)*j-1-(2**(k)-1)),
@@ -63,25 +55,30 @@ obrada:
 		<= C0(k)(2**(k+1)*j-1-(2**(k)-1) -1 downto 2**(k+1)*j-1-(2**(k)-1) -1-(2**(k)-1)) ;
 	C1(k+1)(2**(k+1)*j-1-(2**(k)-1) -1 downto 2**(k+1)*j-1-(2**(k)-1) -1-(2**(k)-1)) 
 		<= C1(k)(2**(k+1)*j-1-(2**(k)-1) -1 downto 2**(k+1)*j-1-(2**(k)-1) -1-(2**(k)-1)) ;
-					
-					
-	zero_merge: 
-	konkatenator port map(BAFER1(k)(2**(k+1)*j-1 downto 2**(k+1)*j-1-((2**(k)-1))),
-					S0(k)(2**(k+1)*j-1-(2**(k)-1) - 1 downto  2**(k+1)*j-1-(2**(k)-1)-1 - (2**(k)-1) ),
-					S0(k+1)(2**(k+1)*j-1 downto 2**(k+1)*j-1-(2**(k)-1)-1 - (2**(k)-1)));
+	
+	
+	--levi blok se dobija selekcijom odgovarajuceg dela sume
+	zero_select: 
+	mux2x1  port map(
+					S1(k)(2**(k+1)*j-1 downto 2**(k+1)*j-1-((2**(k)-1))),
+					S0(k)(2**(k+1)*j-1 downto 2**(k+1)*j-1-(2**(k)-1) ),
+					C0(k)(2**(k+1)*j-1-(2**(k)-1) -1), --?
+					S0(k+1)(2**(k+1)*j-1 downto 2**(k+1)*j-1-((2**(k)-1))));
+	
+	--desni blok se samo kopira
+	S0(k+1)(2**(k+1)*j-1-(2**(k)-1) - 1 downto  2**(k+1)*j-1-(2**(k)-1)-1 - (2**(k)-1) ) <=
+					S0(k)(2**(k+1)*j-1-(2**(k)-1) - 1 downto  2**(k+1)*j-1-(2**(k)-1)-1 - (2**(k)-1) );
 					
 	one_select: 
 	mux2x1  port map(
 					S1(k)(2**(k+1)*j-1 downto 2**(k+1)*j-1-((2**(k)-1))),
 					S0(k)(2**(k+1)*j-1 downto 2**(k+1)*j-1-(2**(k)-1) ),
 					C1(k)(2**(k+1)*j-1-(2**(k)-1) -1), --?
-					BAFER2 (k)(2**(k+1)*j-1 downto 2**(k+1)*j-1-((2**(k)-1))));
-					
-	one_merge: 
-	konkatenator port map(BAFER2(k)(2**(k+1)*j-1 downto 2**(k+1)*j-1-((2**(k)-1))),
-					S1(k)(2**(k+1)*j-1-(2**(k)-1) - 1 downto  2**(k+1)*j-1-(2**(k)-1)-1 - (2**(k)-1) ),
-					S1(k+1)(2**(k+1)*j-1 downto 2**(k+1)*j-1-(2**(k)-1)-1 - (2**(k)-1)));					
-					
+					S1(k+1)(2**(k+1)*j-1 downto 2**(k+1)*j-1-((2**(k)-1))));
+				
+	S1(k+1)(2**(k+1)*j-1-(2**(k)-1) - 1 downto  2**(k+1)*j-1-(2**(k)-1)-1 - (2**(k)-1) ) <=
+					S1(k)(2**(k+1)*j-1-(2**(k)-1) - 1 downto  2**(k+1)*j-1-(2**(k)-1)-1 - (2**(k)-1) );
+				
 	
 end generate po_vrsti;
 

@@ -71,11 +71,11 @@ BEGIN
 		wait for 100 ns;
 
 		-- Place stimulus here
-		A<="00110110" ;
-		B<="01101101" ;
---	   A<="11101110" after 30ns;
---		B<="01101101" after 40ns;
---		B<="00000101" after 40ns;
+		A<="00110110" after 10ns;
+		B<="01101101" after 20ns;
+	   A<="11101110" after 30ns;
+		B<="01101101" after 40ns;
+		B<="00000101" after 40ns;
 		wait; -- will wait forever
 	END PROCESS;
 
