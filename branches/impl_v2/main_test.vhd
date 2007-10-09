@@ -37,31 +37,37 @@ END main_test_vhd;
 ARCHITECTURE behavior OF main_test_vhd IS 
 
 	-- Component Declaration for the Unit Under Test (UUT)
-	COMPONENT main
+	COMPONENT csa
 	port(A,B : in Std_Logic_Vector(7 downto 0); 
 		CI : in Std_Logic; 
+		OP: in STD_LOGIC;
 		S : out Std_Logic_Vector(7 downto 0); 
-		COUT : out Std_Logic); 
+		COUT : out Std_Logic;
+		Overflow: out STD_LOGIC);
 	END COMPONENT;
 
 	--Inputs
 	SIGNAL CI :  std_logic := '0';
 	SIGNAL A :  std_logic_vector(7 downto 0) := (others=>'0');
 	SIGNAL B :  std_logic_vector(7 downto 0) := (others=>'0');
-
+	SIGNAL OP: STD_LOGIC := '0';
 	--Outputs
 	SIGNAL S :  std_logic_vector(7 downto 0);
 	SIGNAL COUT :  std_logic;
+	SIGNAL 	Overflow:  std_logic;
+
 
 BEGIN
 
 	-- Instantiate the Unit Under Test (UUT)
-	uut: main PORT MAP(
+	uut: csa PORT MAP(
 		A => A,
 		B => B,
 		CI => CI,
+		OP => OP,
 		S => S,
-		COUT => COUT
+		COUT => COUT,
+Overflow => Overflow
 	);
 
 	tb : PROCESS

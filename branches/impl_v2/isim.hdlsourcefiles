@@ -1,3 +1,6 @@
+D:/fax/03_algarh/04_projekat-conditional-sum_adder/google_int_sab_v2/postprocessor.vhd
 D:/fax/03_algarh/04_projekat-conditional-sum_adder/google_int_sab_v2/mux2x1.vhd
-D:/fax/03_algarh/04_projekat-conditional-sum_adder/google_int_sab_v2/main.vhd
+D:/fax/03_algarh/04_projekat-conditional-sum_adder/google_int_sab_v2/parallel_carry_sum_generator.vhd
+D:/fax/03_algarh/04_projekat-conditional-sum_adder/google_int_sab_v2/preprocessor.vhd
+D:/fax/03_algarh/04_projekat-conditional-sum_adder/google_int_sab_v2/csa.vhd
 D:/fax/03_algarh/04_projekat-conditional-sum_adder/google_int_sab_v2/main_test.vhd

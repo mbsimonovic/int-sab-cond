@@ -9,16 +9,36 @@ use IEEE.STD_LOGIC_1164.all;
 
 package components is
 
- 
- 
-  
-  
---  type <new_type> is
---    record
---        <type_name>        : std_logic_vector( 7 downto 0);
---        <type_name>        : std_logic;
---    end record;
 
+  
+component mux2x1 is
+    Port ( A : in  STD_LOGIC_VECTOR ;--unconstrained
+           B : in  STD_LOGIC_VECTOR ;
+           CTRL : in  STD_LOGIC;
+           OUTPUT : out  STD_LOGIC_VECTOR );
+end component;
+ 
+component preprocessor is
+	port(A,B : in Std_Logic_Vector; 
+	ZeroSum, OneSum, ZeroCarry,OneCarry: out Std_Logic_Vector);
+end component;
+
+component postprocessor is
+port(
+	ZeroSum,OneSum : in Std_Logic_Vector; 
+	CI,OP, ZeroCarry, OneCarry, PrevZeroCarry, PrevOneCarry  : in Std_Logic; 
+	S : out Std_Logic_Vector;
+	COUT, Overflow : out Std_Logic);
+end component;
+
+component parallel_carry_sum_generator is
+generic (wordLength: INTEGER; logWordLength: INTEGER);
+port(
+	ZeroSum,OneSum : in Std_Logic_Vector(wordLength-1 downto 0); --inicijalne sume
+	ZeroCarry,OneCarry: in Std_Logic_Vector(wordLength-1 downto 0);--inicijalni prenosi
+	ZeroSumFinal,OneSumFinal : out Std_Logic_Vector(wordLength-1 downto 0); --rezultat
+	ZeroCarryFinal,OneCarryFinal : out Std_Logic_Vector(wordLength-1 downto 0)); --prenos
+end component;
 -- Declare constants
 
 --  constant <constant_name>		: time := <time_unit> ns;

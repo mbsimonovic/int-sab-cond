@@ -1,48 +1,55 @@
-
+----------------------------------------------------------------------------------
+-- Company: 
+-- Engineer: 
+-- 
+-- Create Date:    20:56:17 10/09/2007 
+-- Design Name: 
+-- Module Name:    parallel_carry-sum_generator - Behavioral 
+-- Project Name: 
+-- Target Devices: 
+-- Tool versions: 
+-- Description: 
+--
+-- Dependencies: 
+--
+-- Revision: 
+-- Revision 0.01 - File Created
+-- Additional Comments: 
+--
+----------------------------------------------------------------------------------
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
-use IEEE.STD_LOGIC_ARITH.ALL;
-use IEEE.STD_LOGIC_UNSIGNED.ALL;
+use work.components.all;
 
-entity main is
-port(A,B : in Std_Logic_Vector(8-1 downto 0); 
-	CI : in Std_Logic; 
-	S : out Std_Logic_Vector(8-1 downto 0); 
-	COUT : out Std_Logic); 
-end main;
 
-architecture Behavioral of main is
-component mux2x1 is
-    Port ( A : in  STD_LOGIC_VECTOR ;--unconstrained
-           B : in  STD_LOGIC_VECTOR ;
-           CTRL : in  STD_LOGIC;
-           OUTPUT : out  STD_LOGIC_VECTOR );
-end component;
-component konkatenator is
-    Port ( A : in  STD_LOGIC_VECTOR; --unconstrained
-           B : in  STD_LOGIC_VECTOR;
-           c : out  STD_LOGIC_VECTOR);
-end component;
+entity parallel_carry-sum_generator is
+generic (wordLength: INTEGER; logWordLength: INTEGER);
+port(
+	ZeroSum,OneSum : in Std_Logic_Vector(wordLength-1 downto 0); --inicijalne sume
+	ZeroCarry,OneCarry: in Std_Logic_Vector(wordLength-1 downto 0));--inicijalni prenosi
+end parallel_carry-sum_generator;
 
-TYPE matrica IS ARRAY (0 TO 3) OF STD_LOGIC_VECTOR(8-1 DOWNTO 0);
-SIGNAL  S0, S1, C0,C1: matrica;
+architecture Behavioral of parallel_carry-sum_generator is
+
+TYPE matrica IS ARRAY (0 TO logWordLength) OF STD_LOGIC_VECTOR(wordLength-1 DOWNTO 0); 
+SIGNAL S0, S1, C0,C1: matrica;
 
 begin
+--prva vrsta matrica je dobijena kroz ulazne signale:
+S0(0) <= ZeroSum;
+S1(0) <= OneSum;
+C0(0) <= ZeroCarry;
+C1(0) <= OneCarry;
 
-init: 
-S0(0) <= A xor B; 
-S1(0) <= not (A xor B);
-C0(0) <= A AND B;
-C1(0) <= A OR B;
-
-obrada: 
-	for k in 0 to 3-1 generate
-	po_vrsti: for j in 1 to 2**(3-1-k) generate
+across_rows:
+for k in 0 to logWordLength-1 generate
+	across_columns: for j in 1 to 2**(logWordLength-1-k) generate
 	
+	--deo bitova se dobija selekcijom:
 	zero_carry_select: mux2x1  port map(
 					C1(k)(2**(k+1)*j-1 downto 2**(k+1)*j-1-(2**(k)-1)),
 					C0(k)(2**(k+1)*j-1 downto 2**(k+1)*j-1-(2**(k)-1)),
-					C0(k)(2**(k+1)*j-1-(2**(k)-1) -1), 
+				C0(k)(2**(k+1)*j-1-(2**(k)-1) -1), 
 					C0(k+1)(2**(k+1)*j-1 downto 2**(k+1)*j-1-(2**(k)-1)));	
 	
 	one_carry_select: mux2x1  port map(
@@ -51,18 +58,17 @@ obrada:
 					C1(k)(2**(k+1)*j-1-(2**(k)-1) -1), 
 					C1(k+1)(2**(k+1)*j-1 downto 2**(k+1)*j-1-(2**(k)-1)));						
 	
+		--deo bitova se jednostavno prosledjuje:
 	C0(k+1)(2**(k+1)*j-1-(2**(k)-1) -1 downto 2**(k+1)*j-1-(2**(k)-1) -1-(2**(k)-1)) 
 		<= C0(k)(2**(k+1)*j-1-(2**(k)-1) -1 downto 2**(k+1)*j-1-(2**(k)-1) -1-(2**(k)-1)) ;
 	C1(k+1)(2**(k+1)*j-1-(2**(k)-1) -1 downto 2**(k+1)*j-1-(2**(k)-1) -1-(2**(k)-1)) 
 		<= C1(k)(2**(k+1)*j-1-(2**(k)-1) -1 downto 2**(k+1)*j-1-(2**(k)-1) -1-(2**(k)-1)) ;
-	
-	
-	--levi blok se dobija selekcijom odgovarajuceg dela sume
+--levi blok se dobija selekcijom odgovarajuceg dela sume
 	zero_select: 
 	mux2x1  port map(
 					S1(k)(2**(k+1)*j-1 downto 2**(k+1)*j-1-((2**(k)-1))),
 					S0(k)(2**(k+1)*j-1 downto 2**(k+1)*j-1-(2**(k)-1) ),
-					C0(k)(2**(k+1)*j-1-(2**(k)-1) -1), --?
+					C0(k)(2**(k+1)*j-1-(2**(k)-1) -1), 
 					S0(k+1)(2**(k+1)*j-1 downto 2**(k+1)*j-1-((2**(k)-1))));
 	
 	--desni blok se samo kopira
@@ -73,27 +79,15 @@ obrada:
 	mux2x1  port map(
 					S1(k)(2**(k+1)*j-1 downto 2**(k+1)*j-1-((2**(k)-1))),
 					S0(k)(2**(k+1)*j-1 downto 2**(k+1)*j-1-(2**(k)-1) ),
-					C1(k)(2**(k+1)*j-1-(2**(k)-1) -1), --?
+					C1(k)(2**(k+1)*j-1-(2**(k)-1) -1), 
 					S1(k+1)(2**(k+1)*j-1 downto 2**(k+1)*j-1-((2**(k)-1))));
 				
 	S1(k+1)(2**(k+1)*j-1-(2**(k)-1) - 1 downto  2**(k+1)*j-1-(2**(k)-1)-1 - (2**(k)-1) ) <=
 					S1(k)(2**(k+1)*j-1-(2**(k)-1) - 1 downto  2**(k+1)*j-1-(2**(k)-1)-1 - (2**(k)-1) );
 				
 	
-end generate po_vrsti;
+end generate across_columns;
 
-end generate obrada;				
-
---suma: mux2x1 port map(S0(3-1), S1(3-1), CI, S);
-S<=S0(3);
---prenos: mux2x1 port map(C0(3-1), C1(3-1), CI, COUT);
-process (C0(3)(7), C1(3)(7)) 
-begin
-	if (CI = '1') then
-		COUT <= C1(3)(7);
-	else
-	COUT <= C0(3)(7);
-	end if;
-end process;
+end generate across_rows;
 end Behavioral;
 
