@@ -24,7 +24,7 @@
 	SIGNAL CI :  std_logic := '0';
 	SIGNAL A :  std_logic_vector(15 downto 0) := (others=>'0');
 	SIGNAL B :  std_logic_vector(15 downto 0) := (others=>'0');
-	SIGNAL OP: STD_LOGIC := '0';
+	SIGNAL OP: STD_LOGIC := '1';
 	--Outputs
 	SIGNAL S :  std_logic_vector(15 downto 0);
 	SIGNAL COUT :  std_logic;

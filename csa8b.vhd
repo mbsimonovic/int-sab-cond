@@ -53,7 +53,7 @@ end process;
 
 preprocessing: preprocessor port map(
 				A=>A, 
-				B=>B, 
+				B=>BComplemented, 
 				ZeroSum=>S0(0), 
 				OneSum=>S1(0), 
 				ZeroCarry=>C0(0),
