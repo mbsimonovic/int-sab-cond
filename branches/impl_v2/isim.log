@@ -1,10 +1,10 @@
  command line:
-   ./testbench_isim_beh.exe
+   ./csa16b_testbench_isim_beh.exe
      -intstyle  ise
      -ipchost  localhost
-     -ipcport  3174
+     -ipcport  2860
 
-Wed Oct 10 00:21:58 2007
+Wed Oct 10 12:08:37 2007
 
 Total Line Count = 1097
 
@@ -18,19 +18,14 @@ Total Line Count = 1097
  Total blocks 68
  Total primitive blocks 62
  Total processes 137
-ntrace select -o on -n /testbench/ci 
-ntrace select -o on -n /testbench/a 
-ntrace select -o on -n /testbench/b 
-ntrace select -o on -n /testbench/op 
-ntrace select -o on -n /testbench/s 
-ntrace select -o on -n /testbench/cout 
-ntrace select -o on -n /testbench/overflow 
+ntrace select -o on -n /csa16b_testbench/ci 
+ntrace select -o on -n /csa16b_testbench/a 
+ntrace select -o on -n /csa16b_testbench/b 
+ntrace select -o on -n /csa16b_testbench/op 
+ntrace select -o on -n /csa16b_testbench/s 
+ntrace select -o on -n /csa16b_testbench/cout 
+ntrace select -o on -n /csa16b_testbench/overflow 
 ntrace start 
 run 1000 ns 
 Simulator is doing circuit initialization process.
 Finished circuit initialization process.
-restart
-run 100 ns 
-Simulator is doing circuit initialization process.
-Finished circuit initialization process.
-run 100 ns 
