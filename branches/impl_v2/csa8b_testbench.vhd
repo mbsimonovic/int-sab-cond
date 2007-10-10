@@ -10,14 +10,15 @@
   ARCHITECTURE behavior OF csa8b_testbench IS 
 
   -- Component Declaration
-    COMPONENT  csa8b is
-				port(A,B : in Std_Logic_Vector(8-1 downto 0); 
-					CI : in Std_Logic; 
-					OP: in STD_LOGIC;
-					S : out Std_Logic_Vector(8-1 downto 0);
-					COUT : out Std_Logic;
-					Overflow: out STD_LOGIC);
-			END COMPONENT;
+   COMPONENT csa
+	generic (wordLength: INTEGER; logWordLength: INTEGER);
+			port(A,B : in Std_Logic_Vector(wordLength-1 downto 0); 
+			CI : in Std_Logic; 
+			OP: in STD_LOGIC;
+			S : out Std_Logic_Vector(wordLength-1 downto 0);
+			COUT : out Std_Logic;
+			Overflow: out STD_LOGIC);
+	END COMPONENT;
 
    --Inputs
 	SIGNAL CI :  std_logic := '0';
@@ -32,7 +33,7 @@
   BEGIN
 
   -- Component Instantiation
-          uut: csa8b PORT MAP(
+          uut: csa  generic map (8,3) PORT MAP(
                A => A,
 					B => B,
 					CI => CI,

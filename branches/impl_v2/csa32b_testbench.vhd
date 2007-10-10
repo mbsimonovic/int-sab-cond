@@ -10,14 +10,15 @@
   ARCHITECTURE behavior OF csa32b_testbench IS 
 
   -- Component Declaration
-          COMPONENT  csa32b is
-				port(A,B : in Std_Logic_Vector(32-1 downto 0); 
-					CI : in Std_Logic; 
-					OP: in STD_LOGIC;
-					S : out Std_Logic_Vector(32-1 downto 0);
-					COUT : out Std_Logic;
-					Overflow: out STD_LOGIC);
-			END COMPONENT;
+         COMPONENT csa
+	generic (wordLength: INTEGER; logWordLength: INTEGER);
+			port(A,B : in Std_Logic_Vector(wordLength-1 downto 0); 
+			CI : in Std_Logic; 
+			OP: in STD_LOGIC;
+			S : out Std_Logic_Vector(wordLength-1 downto 0);
+			COUT : out Std_Logic;
+			Overflow: out STD_LOGIC);
+	END COMPONENT;
 
          --Inputs
 	SIGNAL CI :  std_logic := '0';
@@ -32,7 +33,7 @@
   BEGIN
 
   -- Component Instantiation
-          uut: csa32b PORT MAP(
+          uut: csa generic map (32,5)  PORT MAP(
                A => A,
 					B => B,
 					CI => CI,

@@ -11,11 +11,12 @@
   ARCHITECTURE behavior OF csa16b_testbench IS 
 
   -- Component Declaration
-   COMPONENT csa16b
-			port(A,B : in Std_Logic_Vector(16-1 downto 0); 
+   COMPONENT csa
+	generic (wordLength: INTEGER; logWordLength: INTEGER);
+			port(A,B : in Std_Logic_Vector; 
 			CI : in Std_Logic; 
 			OP: in STD_LOGIC;
-			S : out Std_Logic_Vector(16-1 downto 0);
+			S : out Std_Logic_Vector;
 			COUT : out Std_Logic;
 			Overflow: out STD_LOGIC);
 	END COMPONENT;
@@ -35,7 +36,7 @@
   BEGIN
 
   -- Component Instantiation
-          uut: csa16b PORT MAP(
+          uut: csa generic map (16,4) PORT MAP(
                A => A,
 					B => B,
 					CI => CI,
