@@ -19,15 +19,17 @@ component mux2x1 is
 end component;
  
 component preprocessor is
-	port(A,B : in Std_Logic_Vector; 
-	ZeroSum, OneSum, ZeroCarry,OneCarry: out Std_Logic_Vector);
+	generic (wordLength: INTEGER :=32);
+	port(A,B : in Std_Logic_Vector (wordLength-1 downto 0); 
+		ZeroSum, OneSum, ZeroCarry, OneCarry: out Std_Logic_Vector(wordLength-1 downto 0));
 end component;
 
 component postprocessor is
+generic (wordLength: INTEGER :=32);
 port(
-	ZeroSum,OneSum : in Std_Logic_Vector; 
+	ZeroSum,OneSum : in Std_Logic_Vector(wordLength-1 downto 0); 
 	CI,OP, ZeroCarry, OneCarry, PrevZeroCarry, PrevOneCarry  : in Std_Logic; 
-	S : out Std_Logic_Vector;
+	S : out Std_Logic_Vector(wordLength-1 downto 0);
 	COUT, Overflow : out Std_Logic);
 end component;
 

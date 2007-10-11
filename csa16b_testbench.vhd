@@ -51,15 +51,19 @@
      tb : PROCESS
      BEGIN
 
-        wait for 100 ns; -- wait until global set/reset completes
-
-        -- Add user defined stimulus here
-		A<="0011011000000101" after 10ns;
-		B<="0110110100000101" after 20ns;
-	   A<="0110111000000101" after 30ns;
-		B<="0110110100000101" after 40ns;
-		B<="0000010100000101" after 40ns;
-        wait; -- will wait forever
+      wait for 100 ns; -- wait until global set/reset completesB<="1001101100111101" after 10ns; -- 39741
+		
+		A<="1101110010011110" after 40ns; -- 56478
+		B<="1101111000000111" after 70ns; -- 56839
+		A<="1001000001011010" after 100ns; -- 36954
+		B<="0110110111110101" after 130ns; -- 28149
+		A<="1010101010000000" after 160ns; -- 43648
+		B<="0101111011101000" after 190ns; -- 24296
+		A<="1000100100001000" after 220ns; -- 35080
+		B<="0010110011101100" after 250ns; -- 11500
+		A<="1101101101000100" after 280ns; -- 56132       
+		
+		wait; -- will wait forever
      END PROCESS tb;
   --  End Test Bench 
 
