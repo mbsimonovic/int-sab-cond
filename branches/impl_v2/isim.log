@@ -2,15 +2,15 @@
    ./csa8b_testbench_isim_beh.exe
      -intstyle  ise
      -ipchost  localhost
-     -ipcport  1457
+     -ipcport  3964
 
-Wed Oct 10 13:27:11 2007
+Thu Oct 11 18:41:45 2007
 
-Total Line Count = 816
+Total Line Count = 828
 
- Elaboration time 0 sec.
+ Elaboration time 0.03125 sec.
 
- Estimate current memory usage 44.6341 Meg. 
+ Estimate current memory usage 44.6382 Meg. 
 
  Total signals 160
  Total nets 260

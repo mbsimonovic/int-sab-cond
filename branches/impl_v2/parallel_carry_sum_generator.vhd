@@ -23,7 +23,7 @@ use work.components.all;
 
 
 entity parallel_carry_sum_generator is
-generic (wordLength: INTEGER; logWordLength: INTEGER);
+generic (wordLength: INTEGER :=32; logWordLength: INTEGER :=5);
 port(
 	ZeroSum,OneSum : in Std_Logic_Vector(wordLength-1 downto 0); --inicijalne sume
 	ZeroCarry,OneCarry: in Std_Logic_Vector(wordLength-1 downto 0);--inicijalni prenosi
@@ -33,7 +33,7 @@ end parallel_carry_sum_generator;
 
 architecture Behavioral of parallel_carry_sum_generator is
 
-TYPE matrica IS ARRAY (0 TO logWordLength) OF STD_LOGIC_VECTOR(wordLength-1 DOWNTO 0); 
+TYPE matrica IS ARRAY (0 TO logWordLength) OF STD_LOGIC_VECTOR(OneSum'range); 
 SIGNAL S0, S1, C0,C1: matrica;
 
 begin

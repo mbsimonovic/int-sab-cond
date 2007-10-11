@@ -21,10 +21,11 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
 entity postprocessor is
+generic (wordLength: INTEGER :=32);
 port(
-	ZeroSum,OneSum : in Std_Logic_Vector; 
+	ZeroSum,OneSum : in Std_Logic_Vector(wordLength-1 downto 0); 
 	CI,OP, ZeroCarry, OneCarry, PrevZeroCarry, PrevOneCarry  : in Std_Logic; 
-	S : out Std_Logic_Vector;
+	S : out Std_Logic_Vector(wordLength-1 downto 0);
 	COUT, Overflow : out Std_Logic);
 end postprocessor;
 

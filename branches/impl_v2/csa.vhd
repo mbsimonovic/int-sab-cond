@@ -23,8 +23,8 @@ use work.components.all;
 
 
 entity csa is
-generic (wordLength: INTEGER; logWordLength: INTEGER);
-	port(A,B : in Std_Logic_Vector(wordLength-1 downto 0); 
+generic (wordLength: INTEGER :=32; logWordLength: INTEGER :=5);
+	port(A,B : in Std_Logic_Vector (wordLength-1 downto 0); 
 			CI : in Std_Logic; 
 			OP: in STD_LOGIC;
 			S : out Std_Logic_Vector(wordLength-1 downto 0);
@@ -52,7 +52,7 @@ begin
 	end if;
 end process;
 
-preprocessing: preprocessor port map(
+preprocessing: preprocessor generic map (wordLength) port map(
 				A=>A, 
 				B=>BComplemented, 
 				ZeroSum=>S0(0), 
@@ -72,7 +72,7 @@ carry_sum_calculation: parallel_carry_sum_generator generic map(wordLength,logWo
 				OneCarryFinal=>C1(1)
 			);
 
-postprocessing: postprocessor port map(
+postprocessing: postprocessor  generic map (wordLength) port map(
 				ZeroSum=>S0(1),
 				OneSum=>S1(1), 
 				CI=>CI,

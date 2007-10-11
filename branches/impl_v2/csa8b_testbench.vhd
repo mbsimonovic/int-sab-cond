@@ -54,11 +54,26 @@
 		A<="11011111" after 100ns; -- 223
 		B<="00001101" after 130ns; -- 13
 		A<="10100001" after 160ns; -- 161
-		OP<='1'; --prelazimo na oduzimanje
+		
 		B<="11011101" after 190ns; -- 221
 		A<="11110101" after 220ns; -- 245
 		B<="00110101" after 250ns; -- 53
 		A<="10101010" after 280ns; -- 170
+		
+		OP<='1' after 300ns; --prelazimo na oduzimanje
+		
+		B<="10111101" after 310ns; -- 189
+		A<="00001001" after 340ns; -- 9
+		B<="01110100" after 370ns; -- 116
+		A<="00001110" after 400ns; -- 14
+		B<="11101100" after 430ns; -- 236
+		A<="10011001" after 460ns; -- 153
+		B<="00011111" after 490ns; -- 31
+		A<="00010010" after 520ns; -- 18
+		B<="11111100" after 550ns; -- 252
+		A<="11111110" after 580ns; -- 254
+
+		
 --       A<="10101011" after 10ns; 
 --		B<="01111101" after 20ns; 
 --		A<="11001111" after 30ns; 
