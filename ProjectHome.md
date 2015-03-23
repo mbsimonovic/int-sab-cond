@@ -1,0 +1,3 @@
+Zadatak:
+
+U VHDL-u generički opisati Conditional-Sum sabirač. Za opis ulaznih i izlaznih portova kola koristiti unconstrained tehniku. Kreirati paket koji sadrži opisano kolo. Paket treba da sadrži preklopljenu funkciju ’+’, čijim se pozivom instancira komponenta kola. Iz kreiranog paketa instancirati opisano kolo i implementirati na VirtexE FPGA čipu. Prikazati i komentarisati rezultate implementacije za različite dimenzije kola.
